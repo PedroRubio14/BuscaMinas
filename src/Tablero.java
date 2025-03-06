@@ -17,7 +17,7 @@ public class Tablero {
     }
 
     public void setTablero(Casilla[][] tablero) {
-        this.tablero = tablero;
+        Tablero.tablero = tablero;
     }
 
     public int getFilas() {
@@ -27,7 +27,7 @@ public class Tablero {
     public void llenar_tablero(){
         for(int i = 0; i<tablero.length;i++) {
             for (int y = 0; y < tablero[1].length; y++) {
-                tablero[y][i] = new Casilla(true,false,false);
+                tablero[y][i] = new Casilla(false,true,false);
 
             }
         }
@@ -56,17 +56,26 @@ public class Tablero {
     }
 
     public void mostrar_tablero(){
-        for(int i = 0; i<tablero.length;i++){
-            for(int y =0;y<tablero[1].length;y++){
-                    if(tablero[i][y].isMarcada()){
-                    Textos.imprimir(Textos.Codigo.CASILLA_MARCADA,tablero[i][y]);
-                } else if(tablero[i][y].isTapada()) {
+            for (int i = 0; i < tablero.length; i++) {
+                for (int y = 0; y < tablero[i].length; y++) {
+                    if(y%10 == 0){
+                        Textos.imprimir(Textos.Codigo.ESPACIO);
+                    }
+                    if (tablero[i][y].isMarcada()) {
+                        Textos.imprimir(Textos.Codigo.CASILLA_MARCADA, tablero[i][y]);
+                    }
+                    else if (tablero[i][y].isTapada()) {
                         Textos.imprimir(Textos.Codigo.CASILLA_TAPADA, tablero[i][y]);
-                    } else if (!tablero[i][y].isTapada() && !tablero[i][y].isBomba()){
+                    }
+                    else if (!tablero[i][y].isTapada() && !tablero[i][y].isBomba()) {
                         Textos.imprimir(Textos.Codigo.CASILLA_DESTAPADA, tablero[i][y]);
                     }
+                    else if (!tablero[i][y].isTapada() && tablero[i][y].isBomba()) {
+                        Textos.imprimir(Textos.Codigo.CASILLA_BOMBA, tablero[i][y]);
+                    }
+                }
             }
         }
-    }
+
 
 }

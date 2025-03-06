@@ -12,6 +12,7 @@ public class Textos {
     }
 
     public enum Codigo {
+        ESPACIO,
         PARTIDA_FINALIZADA,
         CASILLA_TAPADA,
         CASILLA_BOMBA,
@@ -45,6 +46,10 @@ public class Textos {
 
             case CASILLA_DESTAPADA:
                 System.out.print("["+Casilla.getNum_bombas()+"]");
+                break;
+
+            case ESPACIO:
+                System.out.println();
                 break;
 
 
