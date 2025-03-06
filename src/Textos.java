@@ -13,6 +13,10 @@ public class Textos {
 
     public enum Codigo {
         PARTIDA_FINALIZADA,
+        CASILLA_TAPADA,
+        CASILLA_BOMBA,
+        CASILLA_MARCADA,
+        CASILLA_DESTAPADA,
 
     }
 
@@ -26,6 +30,24 @@ public class Textos {
             case PARTIDA_FINALIZADA:
                 System.out.print("La partida ha finalizado");
                 break;
+
+            case CASILLA_TAPADA:
+                System.out.print("[||]");
+                break;
+
+            case CASILLA_BOMBA:
+                System.out.print("[X]");
+                break;
+
+            case CASILLA_MARCADA:
+                System.out.print("[+]");
+                break;
+
+            case CASILLA_DESTAPADA:
+                System.out.print("["+Casilla.getNum_bombas()+"]");
+                break;
+
+
         }
 
     }

@@ -2,7 +2,6 @@ public class Tablero {
     private final int filas = 10;
     private final int columnas = 10;
     private static Casilla[][] tablero;
-    private static int numero_minas = 20;
 
 
     public Tablero (){
@@ -25,21 +24,49 @@ public class Tablero {
         return filas;
     }
 
-    private void colocar_bombas(){
+    public void llenar_tablero(){
+        for(int i = 0; i<tablero.length;i++) {
+            for (int y = 0; y < tablero[1].length; y++) {
+                tablero[y][i] = new Casilla(true,false,false);
 
-        for(int i = 0; i < numero_minas;i++){
-            int fila = (int) (Math.floor(Math.random()*(10+1)));
-            int columna = (int) (Math.floor(Math.random()*(10+1)));
-            if(!tablero[columna][fila].isBomba() ){
+            }
+        }
+
+        colocar_bombas();
+    }
+
+    public void colocar_bombas() {
+        int numero_minas = 20;
+        int bombas_colocadas = 0;
+
+        while (bombas_colocadas < numero_minas) {
+            int fila = (int) (Math.floor(Math.random() * 10));
+            int columna = (int) (Math.floor(Math.random() * 10));
+
+            if (!tablero[columna][fila].isBomba()) {
                 tablero[columna][fila].setBomba(true);
-            } else {
-                i--;
+                bombas_colocadas++;
             }
         }
     }
 
+
     private void contar_bombas(){
 
+    }
+
+    public void mostrar_tablero(){
+        for(int i = 0; i<tablero.length;i++){
+            for(int y =0;y<tablero[1].length;y++){
+                    if(tablero[i][y].isMarcada()){
+                    Textos.imprimir(Textos.Codigo.CASILLA_MARCADA,tablero[i][y]);
+                } else if(tablero[i][y].isTapada()) {
+                        Textos.imprimir(Textos.Codigo.CASILLA_TAPADA, tablero[i][y]);
+                    } else if (!tablero[i][y].isTapada() && !tablero[i][y].isBomba()){
+                        Textos.imprimir(Textos.Codigo.CASILLA_DESTAPADA, tablero[i][y]);
+                    }
+            }
+        }
     }
 
 }
