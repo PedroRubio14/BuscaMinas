@@ -18,6 +18,9 @@ public class Textos {
         CASILLA_BOMBA,
         CASILLA_MARCADA,
         CASILLA_DESTAPADA,
+        ELECCION,
+        ELECCION_CASILLA_F,
+        ELECCION_CASILLA_C,
 
     }
 
@@ -51,6 +54,21 @@ public class Textos {
             case ESPACIO:
                 System.out.println();
                 break;
+
+            case ELECCION:
+                System.out.println("Que quieres hacer? ");
+                System.out.println("Marcar casilla? M");
+                System.out.println("O Destapar casilla? D");
+                break;
+
+            case ELECCION_CASILLA_F:
+                System.out.println("FILA: ");
+                break;
+
+            case ELECCION_CASILLA_C:
+                System.out.println("COLUMNA: ");
+                break;
+
 
 
         }

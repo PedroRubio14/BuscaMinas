@@ -1,7 +1,7 @@
 public class Tablero {
     private final int filas = 10;
     private final int columnas = 10;
-    private static Casilla[][] tablero;
+    public static Casilla[][] tablero;
 
 
     public Tablero (){
@@ -31,8 +31,6 @@ public class Tablero {
 
             }
         }
-
-        colocar_bombas();
     }
 
     public void colocar_bombas() {
@@ -43,7 +41,7 @@ public class Tablero {
             int fila = (int) (Math.floor(Math.random() * 10));
             int columna = (int) (Math.floor(Math.random() * 10));
 
-            if (!tablero[columna][fila].isBomba()) {
+            if (!tablero[columna][fila].isBomba() && tablero[columna][fila].isTapada() ) {
                 tablero[columna][fila].setBomba(true);
                 bombas_colocadas++;
             }
