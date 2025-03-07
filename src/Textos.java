@@ -48,7 +48,10 @@ public class Textos {
                 break;
 
             case CASILLA_DESTAPADA:
-                System.out.print("["+Casilla.getNum_bombas()+"]");
+                if(args.length > 0 && args[0] instanceof Casilla c){
+                    System.out.print("["+c.getNum_bombas()+"]");
+                }
+
                 break;
 
             case ESPACIO:

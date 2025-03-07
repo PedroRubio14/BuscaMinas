@@ -27,7 +27,7 @@ public class Tablero {
     public void llenar_tablero(){
         for(int i = 0; i<tablero.length;i++) {
             for (int y = 0; y < tablero[1].length; y++) {
-                tablero[y][i] = new Casilla(false,true,false);
+                tablero[y][i] = new Casilla(false,true,false,0);
 
             }
         }
@@ -56,12 +56,13 @@ public class Tablero {
             for (int y = 0; y < tablero[i].length; y++) {
                 if(tablero[i][y].isBomba()){
 
-                    for (int[] desplazamiento : desplazamientos) {
-                        int nuevaFila = i + desplazamiento[0];
-                        int nuevaColumna = y + desplazamiento[1];
+                    for (int k = 0; k < desplazamientos.length; k++) {
+                        int nuevaFila = i + desplazamientos[k][0];
+                        int nuevaColumna = y + desplazamientos[k][1];
 
                         if (nuevaFila >= 0 && nuevaFila < tablero.length &&
-                                nuevaColumna >= 0 && nuevaColumna < tablero[i].length) {
+                                nuevaColumna >= 0 && nuevaColumna < tablero[i].length
+                                && !tablero[nuevaFila][nuevaColumna].isBomba()) {
                                 tablero[nuevaFila][nuevaColumna].setNum_bombas(tablero[nuevaFila][nuevaColumna].getNum_bombas()+1);
 
                         }

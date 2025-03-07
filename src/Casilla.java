@@ -9,12 +9,13 @@ public class Casilla {
         O,
     }
 
-    private static int num_bombas = 0;
+    private int num_bombas = 0;
 
-    public Casilla(boolean bomba, boolean tapada, boolean marcada) {
+    public Casilla(boolean bomba, boolean tapada, boolean marcada, int num_bombas) {
         this.bomba = bomba;
         this.tapada = tapada;
         this.marcada = marcada;
+        this.num_bombas = 0;
     }
 
     public boolean isTapada() {
@@ -41,12 +42,12 @@ public class Casilla {
         this.marcada = marcada;
     }
 
-    public static int getNum_bombas() {
+    public int getNum_bombas() {
         return num_bombas;
     }
 
     public void setNum_bombas(int num_bombas) {
-        Casilla.num_bombas = num_bombas;
+        this.num_bombas = num_bombas;
     }
 
 }

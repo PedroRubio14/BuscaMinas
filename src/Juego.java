@@ -38,7 +38,7 @@ public class Juego {
             Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_C);
             int columna = Textos.llegirInt ();
 
-            Tablero.tablero[columna][fila].setTapada(false);
+            Tablero.tablero[fila][columna].setTapada(false);
 
         }
 
