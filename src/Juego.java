@@ -15,6 +15,7 @@ public class Juego {
         while(!partida_finalizada){
             turno();
             t.mostrar_tablero();
+            partida_finalizada = (Tablero.ganador() || Tablero.perdedor());
 
         }
 
@@ -38,7 +39,7 @@ public class Juego {
             Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_C);
             int columna = Textos.llegirInt ();
 
-            Tablero.tablero[fila][columna].setTapada(false);
+            Tablero.destapar(fila, columna);
 
         }
 

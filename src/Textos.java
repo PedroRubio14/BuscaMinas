@@ -21,6 +21,8 @@ public class Textos {
         ELECCION,
         ELECCION_CASILLA_F,
         ELECCION_CASILLA_C,
+        GANADOR,
+        PERDEDOR,
 
     }
 
@@ -73,6 +75,13 @@ public class Textos {
             case ELECCION_CASILLA_C:
                 System.out.println("COLUMNA: ");
                 break;
+            case GANADOR:
+                System.out.println("HAS GANDO!!");
+                break;
+            case PERDEDOR:
+                System.out.println("HAS PERDIDO  :( ");
+                break;
+
 
 
 

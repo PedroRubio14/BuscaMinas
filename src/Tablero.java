@@ -94,7 +94,65 @@ public class Tablero {
                     }
                 }
             }
+    }
+
+    public static boolean ganador(){
+        for (int i = 0; i < tablero.length; i++) {
+            for (int y = 0; y < tablero[i].length; y++) {
+
+                if(tablero[y][i].isTapada() && !tablero[y][i].isBomba()){
+                    Textos.imprimir(Textos.Codigo.GANADOR);
+                    return false;
+
+                }
+
+
+            }
         }
+        Textos.imprimir(Textos.Codigo.GANADOR);
+        return true;
+    }
+
+    public static boolean perdedor(){
+        for (int i = 0; i < tablero.length; i++) {
+            for (int y = 0; y < tablero[i].length; y++) {
+
+                if(!tablero[y][i].isTapada() && tablero[y][i].isBomba()){
+                    Textos.imprimir(Textos.Codigo.PERDEDOR);
+                    return true;
+
+                }
+
+
+            }
+        }
+        return false;
+
+    }
+
+
+    public static void destapar(int fila, int columna) {
+        if (fila < 0 || fila >= tablero.length || columna < 0 || columna >= tablero[0].length) {
+            return;
+        }
+
+        if (!tablero[fila][columna].isTapada()) {
+            return;
+        }
+
+        tablero[fila][columna].setTapada(false);
+
+
+        if (tablero[fila][columna].getNum_bombas() == 0) {
+            int[][] desplazamientos = { {-1, -1}, {-1, 0}, {-1, 1}, {0, -1},{0, 1}, {1, -1},  {1, 0}, {1, 1}};
+
+            for (int i = 0; i < desplazamientos.length; i++) {
+                int nuevaFila = fila + desplazamientos[i][0];
+                int nuevaColumna = columna + desplazamientos[i][1];
+                destapar(nuevaFila, nuevaColumna);
+            }
+        }
+    }
 
 
 }
