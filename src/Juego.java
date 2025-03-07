@@ -10,7 +10,11 @@ public class Juego {
         //primer turno
         turno();
         t.colocar_bombas();
+        t.contar_bombas();
+
         while(!partida_finalizada){
+            turno();
+            t.mostrar_tablero();
 
         }
 
@@ -26,7 +30,7 @@ public class Juego {
             Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_C);
             int columna = Textos.llegirInt ();
 
-            Tablero.tablero[columna][fila].setMarcada(true);
+            Tablero.tablero[fila][columna].setMarcada(true);
 
         } else if(eleccion.equalsIgnoreCase("d")){
             Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_F);
@@ -34,7 +38,7 @@ public class Juego {
             Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_C);
             int columna = Textos.llegirInt ();
 
-            Tablero.tablero[columna][fila].setTapada(true);
+            Tablero.tablero[columna][fila].setTapada(false);
 
         }
 

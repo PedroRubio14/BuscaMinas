@@ -56,12 +56,14 @@ public class Textos {
                 break;
 
             case ELECCION:
+                System.out.println();
                 System.out.println("Que quieres hacer? ");
                 System.out.println("Marcar casilla? M");
                 System.out.println("O Destapar casilla? D");
                 break;
 
             case ELECCION_CASILLA_F:
+                System.out.println();
                 System.out.println("FILA: ");
                 break;
 

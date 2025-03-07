@@ -38,8 +38,8 @@ public class Tablero {
         int bombas_colocadas = 0;
 
         while (bombas_colocadas < numero_minas) {
-            int fila = (int) (Math.floor(Math.random() * 10));
-            int columna = (int) (Math.floor(Math.random() * 10));
+            int fila = (int) (Math.random() * 10);
+            int columna = (int) (Math.random() * 10);
 
             if (!tablero[columna][fila].isBomba() && tablero[columna][fila].isTapada() ) {
                 tablero[columna][fila].setBomba(true);
@@ -49,8 +49,28 @@ public class Tablero {
     }
 
 
-    private void contar_bombas(){
+    public void contar_bombas(){
+        int[][] desplazamientos = { {-1, -1}, {-1, 0}, {-1, 1}, {0, -1},{0, 1}, {1, -1},  {1, 0}, {1, 1}};
 
+        for (int i = 0; i < tablero.length; i++) {
+            for (int y = 0; y < tablero[i].length; y++) {
+                if(tablero[i][y].isBomba()){
+
+                    for (int[] desplazamiento : desplazamientos) {
+                        int nuevaFila = i + desplazamiento[0];
+                        int nuevaColumna = y + desplazamiento[1];
+
+                        if (nuevaFila >= 0 && nuevaFila < tablero.length &&
+                                nuevaColumna >= 0 && nuevaColumna < tablero[i].length) {
+                                tablero[nuevaFila][nuevaColumna].setNum_bombas(tablero[nuevaFila][nuevaColumna].getNum_bombas()+1);
+
+                        }
+                    }
+
+
+                }
+            }
+        }
     }
 
     public void mostrar_tablero(){
