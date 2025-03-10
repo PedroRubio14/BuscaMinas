@@ -43,12 +43,6 @@ public class Textos {
         PERDEDOR,
 
     }
-
-    public static void mostrarTablero(Tablero t){
-
-    }
-
-
     public static void imprimir (Codigo codigo, Object...args){
         switch (codigo){
             case PARTIDA_FINALIZADA:
