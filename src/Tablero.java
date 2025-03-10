@@ -34,7 +34,7 @@ public class Tablero {
     }
 
     public void colocar_bombas() {
-        int numero_minas = 20;
+        int numero_minas = 10;
         int bombas_colocadas = 0;
 
         while (bombas_colocadas < numero_minas) {
@@ -166,6 +166,28 @@ public class Tablero {
                 destapar(nuevaFila, nuevaColumna);
             }
         }
+    }
+
+    public static void destapar_primero(int fila, int columna){
+        int[][] desplazamientos = { {-1, -1}, {-1, 0},{-2,0}, {-1, 1}, {0, -1}, {0,-2}, {0, 1} ,{0, 2}, {1, -1},  {1, 0} , {2,0}, {1, 1}};
+
+        if (fila < 0 || fila >= tablero.length || columna < 0 || columna >= tablero[0].length) {
+            return;
+        }
+        tablero[fila][columna].setTapada(false);
+
+        for (int k = 0; k < desplazamientos.length; k++) {
+            int nuevaFila = fila + desplazamientos[k][0];
+            int nuevaColumna = columna + desplazamientos[k][1];
+
+            if (nuevaFila >= 0 && nuevaFila < tablero.length &&
+                    nuevaColumna >= 0 && nuevaColumna < tablero[fila].length) {
+                     tablero[nuevaFila][nuevaColumna].setTapada(false);
+
+            }
+        }
+
+
     }
 
 

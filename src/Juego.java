@@ -7,9 +7,6 @@ public class Juego {
 
         boolean partida_finalizada = false;
 
-        //primer turno
-
-
         primerTurno(t);
 
         while(!partida_finalizada){
@@ -46,28 +43,17 @@ public class Juego {
     }
 
     public void primerTurno(Tablero t){
-        Textos.imprimir(Textos.Codigo.ELECCION);
-        String eleccion = Textos.llegirString();
-
-        if(eleccion.equalsIgnoreCase("m")){
             Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_F);
             int fila = Textos.llegirInt ();
             Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_C);
             int columna = Textos.llegirInt ();
 
-            Tablero.tablero[fila][columna].setMarcada(true);
-
-        } else if(eleccion.equalsIgnoreCase("d")){
-            Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_F);
-            int fila = Textos.llegirInt ();
-            Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_C);
-            int columna = Textos.llegirInt ();
-
+            Tablero.destapar_primero(fila, columna);
             t.colocar_bombas();
             t.contar_bombas();
-            Tablero.destapar(fila, columna);
 
-        }
+
+
 
 
     }

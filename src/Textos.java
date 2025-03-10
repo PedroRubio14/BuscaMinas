@@ -16,6 +16,19 @@ public class Textos {
     public static final String ROJO = "\033[31m";
     public static final String AZUL = "\033[34m";
 
+    public static final String[] COLORES_BOMBAS = {
+            "\033[37m", // Gris
+            "\033[34m", // Azul
+            "\033[32m", // Verde
+            "\033[31m", // Rojo
+            "\033[35m", // Magenta
+            "\033[36m", // Cian
+            "\033[33m", // Amarillo
+            "\033[91m", // Rojo claro
+            "\033[94m", // Azul claro
+    };
+
+
     public enum Codigo {
         ESPACIO,
         PARTIDA_FINALIZADA,
@@ -43,20 +56,22 @@ public class Textos {
                 break;
 
             case CASILLA_TAPADA:
-                System.out.print(GRIS + "[⬜]" + RESET);
+                System.out.printf("[%2s]", GRIS + "⬜" + RESET);
                 break;
 
             case CASILLA_BOMBA:
-                System.out.print(ROJO + "[💣]" + RESET);
+                System.out.printf("[%2s]", ROJO + "💣" + RESET);
                 break;
 
             case CASILLA_MARCADA:
-                System.out.print(AZUL +"[🚩]" + RESET);
+                System.out.printf("[%2s]",AZUL +"🚩" + RESET);
                 break;
 
             case CASILLA_DESTAPADA:
                 if(args.length > 0 && args[0] instanceof Casilla c){
-                    System.out.print("["+c.getNum_bombas()+"]");
+                    int numBombas = c.getNum_bombas();
+                    String color = COLORES_BOMBAS[numBombas];
+                    System.out.printf("[%s%2d%s]", color, numBombas, RESET);
                 }
 
                 break;
@@ -69,7 +84,7 @@ public class Textos {
                 System.out.println();
                 System.out.println("Que quieres hacer? ");
                 System.out.println("Marcar casilla? M");
-                System.out.println("O Destapar casilla? D");
+                System.out.println("Destapar casilla? D");
                 break;
 
             case ELECCION_CASILLA_F:
@@ -81,6 +96,7 @@ public class Textos {
                 System.out.println("COLUMNA: ");
                 break;
             case GANADOR:
+                System.out.println();
                 System.out.println("HAS GANDO!!");
                 break;
             case PERDEDOR:
