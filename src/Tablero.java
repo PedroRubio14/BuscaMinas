@@ -74,7 +74,7 @@ public class Tablero {
         }
     }
 
-    public void mostrar_tablero(){
+    public static void mostrar_tablero(){
             for (int i = 0; i < tablero.length; i++) {
                 for (int y = 0; y < tablero[i].length; y++) {
                     if(y%10 == 0){
@@ -101,7 +101,6 @@ public class Tablero {
             for (int y = 0; y < tablero[i].length; y++) {
 
                 if(tablero[y][i].isTapada() && !tablero[y][i].isBomba()){
-                    Textos.imprimir(Textos.Codigo.GANADOR);
                     return false;
 
                 }
@@ -119,6 +118,8 @@ public class Tablero {
 
                 if(!tablero[y][i].isTapada() && tablero[y][i].isBomba()){
                     Textos.imprimir(Textos.Codigo.PERDEDOR);
+                    mostrar_bombas();
+
                     return true;
 
                 }
@@ -128,6 +129,19 @@ public class Tablero {
         }
         return false;
 
+    }
+    public static void mostrar_bombas (){
+        for (int i = 0; i < tablero.length; i++) {
+            for (int y = 0; y < tablero[i].length; y++) {
+
+                if(tablero[i][y].isBomba()){
+                    tablero[i][y].setTapada(false);
+
+                }
+
+            }
+        }
+        mostrar_tablero();
     }
 
 
@@ -143,7 +157,7 @@ public class Tablero {
         tablero[fila][columna].setTapada(false);
 
 
-        if (tablero[fila][columna].getNum_bombas() == 0) {
+        if (tablero[fila][columna].getNum_bombas() == 0 && !tablero[fila][columna].isBomba()) {
             int[][] desplazamientos = { {-1, -1}, {-1, 0}, {-1, 1}, {0, -1},{0, 1}, {1, -1},  {1, 0}, {1, 1}};
 
             for (int i = 0; i < desplazamientos.length; i++) {

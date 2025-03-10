@@ -4,10 +4,6 @@ public class Casilla {
     private boolean bomba;
     private boolean marcada;
 
-    private enum icono {
-        X,
-        O,
-    }
 
     private int num_bombas = 0;
 

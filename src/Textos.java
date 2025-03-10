@@ -11,6 +11,11 @@ public class Textos {
         return sc.nextLine();
     }
 
+    public static final String RESET = "\033[0m";
+    public static final String GRIS = "\033[37m";
+    public static final String ROJO = "\033[31m";
+    public static final String AZUL = "\033[34m";
+
     public enum Codigo {
         ESPACIO,
         PARTIDA_FINALIZADA,
@@ -38,15 +43,15 @@ public class Textos {
                 break;
 
             case CASILLA_TAPADA:
-                System.out.print("[||]");
+                System.out.print(GRIS + "[⬜]" + RESET);
                 break;
 
             case CASILLA_BOMBA:
-                System.out.print("[X]");
+                System.out.print(ROJO + "[💣]" + RESET);
                 break;
 
             case CASILLA_MARCADA:
-                System.out.print("[+]");
+                System.out.print(AZUL +"[🚩]" + RESET);
                 break;
 
             case CASILLA_DESTAPADA:
@@ -79,6 +84,7 @@ public class Textos {
                 System.out.println("HAS GANDO!!");
                 break;
             case PERDEDOR:
+                System.out.println();
                 System.out.println("HAS PERDIDO  :( ");
                 break;
 
