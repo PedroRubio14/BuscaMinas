@@ -146,11 +146,9 @@ public class Tablero {
 
 
     public static void destapar(int fila, int columna) {
-        if (fila < 0 || fila >= tablero.length || columna < 0 || columna >= tablero[0].length) {
-            return;
-        }
+        if (fila < 0 || fila >= tablero.length || columna < 0 || columna >= tablero[0].length
+                || !tablero[fila][columna].isTapada() || !tablero[fila][columna].isMarcada()) {
 
-        if (!tablero[fila][columna].isTapada()) {
             return;
         }
 
@@ -163,6 +161,7 @@ public class Tablero {
             for (int i = 0; i < desplazamientos.length; i++) {
                 int nuevaFila = fila + desplazamientos[i][0];
                 int nuevaColumna = columna + desplazamientos[i][1];
+
                 destapar(nuevaFila, nuevaColumna);
             }
         }

@@ -11,7 +11,7 @@ public class Juego {
 
         while(!partida_finalizada){
             turno();
-            t.mostrar_tablero();
+            Tablero.mostrar_tablero();
             partida_finalizada = (Tablero.ganador() || Tablero.perdedor());
 
         }
@@ -28,7 +28,12 @@ public class Juego {
             Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_C);
             int columna = Textos.llegirInt ();
 
-            Tablero.tablero[fila][columna].setMarcada(true);
+            if(!Tablero.tablero[fila][columna].isMarcada() &&  Tablero.tablero[fila][columna].isTapada()){
+
+                Tablero.tablero[fila][columna].setMarcada(true);
+            }
+
+
 
         } else if(eleccion.equalsIgnoreCase("d")){
             Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_F);
