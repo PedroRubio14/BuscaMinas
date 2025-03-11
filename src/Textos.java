@@ -41,6 +41,7 @@ public class Textos {
         ELECCION_CASILLA_C,
         GANADOR,
         PERDEDOR,
+        NUMERO,
 
     }
     public static void imprimir (Codigo codigo, Object...args){
@@ -50,22 +51,23 @@ public class Textos {
                 break;
 
             case CASILLA_TAPADA:
-                System.out.printf("[%2s]", GRIS + "⬜" + RESET);
+                System.out.printf("[ %s ]" ,GRIS + "⬜" + RESET);
                 break;
 
             case CASILLA_BOMBA:
-                System.out.printf("[%2s]", ROJO + "💣" + RESET);
+                System.out.print( ROJO + "[ 💣 ]" + RESET);
                 break;
 
             case CASILLA_MARCADA:
-                System.out.printf("[%2s]",AZUL +"🚩" + RESET);
+                System.out.print(AZUL +"[ 🚩 ]" + RESET);
                 break;
 
             case CASILLA_DESTAPADA:
-                if(args.length > 0 && args[0] instanceof Casilla c){
+                if (args.length > 0 && args[0] instanceof Casilla c) {
                     int numBombas = c.getNum_bombas();
                     String color = COLORES_BOMBAS[numBombas];
-                    System.out.printf("[%s%2d%s]", color, numBombas, RESET);
+                    String texto = color + String.format("%2d", numBombas) + RESET;
+                    System.out.printf("[ %s ]", texto);
                 }
 
                 break;
@@ -78,7 +80,9 @@ public class Textos {
                 System.out.println();
                 System.out.println("Que quieres hacer? ");
                 System.out.println("Marcar casilla? M");
+                System.out.println("Destmarcar casilla? DM");
                 System.out.println("Destapar casilla? D");
+
                 break;
 
             case ELECCION_CASILLA_F:
@@ -98,6 +102,10 @@ public class Textos {
                 System.out.println("HAS PERDIDO  :( ");
                 break;
 
+            case NUMERO:
+                if(args.length > 0 && args[0] instanceof Integer n) {
+                    System.out.printf("%5d ",n);
+                }
 
 
 

@@ -1,27 +1,36 @@
 public class Juego {
+    private static boolean partida_finalizada = false;
+
+    public static void setPartida_finalizada(boolean partida_finalizada) {
+        Juego.partida_finalizada = partida_finalizada;
+    }
+
     public void partida (){
-        Tablero t = new Tablero(10,10);
+        Tablero t = new Tablero(10,10,80);
         int numeroTurno = 0;
-        boolean partida_finalizada = false;
+
 
         while(!partida_finalizada){
             if(numeroTurno == 0){
                 t.llenar_tablero();
                 Tablero.mostrar_tablero();
                 primerTurno(t);
+                Tablero.mostrar_tablero();
+                numeroTurno++;
             } else {
                 turno();
                 Tablero.mostrar_tablero();
-                partida_finalizada = (Tablero.ganador() || Tablero.perdedor());
+                numeroTurno++;
             }
-            numeroTurno++;
-
+            t.ganador(t);
         }
 
     }
 
     public void turno(){
         Textos.imprimir(Textos.Codigo.ELECCION);
+        Textos.llegirString();
+        Textos.imprimir(Textos.Codigo.ESPACIO);
         String eleccion = Textos.llegirString();
 
         if(eleccion.equalsIgnoreCase("m")){
@@ -45,6 +54,15 @@ public class Juego {
 
             Tablero.destapar(fila, columna);
 
+        }
+
+        else if(eleccion.equalsIgnoreCase("DM")){
+            Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_F);
+            int fila = Textos.llegirInt ();
+            Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_C);
+            int columna = Textos.llegirInt ();
+
+            Tablero.tablero[fila][columna].setMarcada(false);
         }
 
     }
