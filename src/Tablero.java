@@ -1,10 +1,13 @@
 public class Tablero {
-    private final int filas = 10;
-    private final int columnas = 10;
+    private int filas ;
+    private int columnas;
     public static Casilla[][] tablero;
+    private static final int[][] desplazamientos = { {-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
 
 
-    public Tablero (){
+    public Tablero (int filas, int columnas){
+        this.filas = filas;
+        this.columnas = columnas;
          tablero = new Casilla[columnas][filas];
     }
 
@@ -12,7 +15,7 @@ public class Tablero {
         return columnas;
     }
 
-    public static Casilla[][] getTablero() {
+    public  Casilla[][] getTablero() {
         return tablero;
     }
 
@@ -33,13 +36,13 @@ public class Tablero {
         }
     }
 
-    public void colocar_bombas() {
-        int numero_minas = 10;
+    public static void colocar_bombas(Tablero t) {
+        int numero_minas = 30;
         int bombas_colocadas = 0;
 
         while (bombas_colocadas < numero_minas) {
-            int fila = (int) (Math.random() * 10);
-            int columna = (int) (Math.random() * 10);
+            int fila = (int) (Math.random() * t.getFilas());
+            int columna = (int) (Math.random() * t.getColumnas());
 
             if (!tablero[columna][fila].isBomba() && tablero[columna][fila].isTapada() ) {
                 tablero[columna][fila].setBomba(true);
@@ -49,9 +52,7 @@ public class Tablero {
     }
 
 
-    public void contar_bombas(){
-        int[][] desplazamientos = { {-1, -1}, {-1, 0}, {-1, 1}, {0, -1},{0, 1}, {1, -1},  {1, 0}, {1, 1}};
-
+    public static void contar_bombas(){
         for (int i = 0; i < tablero.length; i++) {
             for (int y = 0; y < tablero[i].length; y++) {
                 if(tablero[i][y].isBomba()){
@@ -67,8 +68,6 @@ public class Tablero {
 
                         }
                     }
-
-
                 }
             }
         }
@@ -100,7 +99,7 @@ public class Tablero {
         for (int i = 0; i < tablero.length; i++) {
             for (int y = 0; y < tablero[i].length; y++) {
 
-                if(tablero[y][i].isTapada() && !tablero[y][i].isBomba()){
+                if(tablero[i][y].isTapada() && !tablero[y][i].isBomba()){
                     return false;
 
                 }
@@ -146,34 +145,31 @@ public class Tablero {
 
 
     public static void destapar(int fila, int columna) {
-        if (fila < 0 || fila >= tablero.length || columna < 0 || columna >= tablero[0].length
-                || !tablero[fila][columna].isTapada() || !tablero[fila][columna].isMarcada()) {
-
+       if (fila < 0 || fila >= tablero.length || columna < 0 || columna >= tablero[0].length
+                || !tablero[fila][columna].isTapada() || tablero[fila][columna].isMarcada()) {
             return;
         }
 
+
+
         tablero[fila][columna].setTapada(false);
-
-
-        if (tablero[fila][columna].getNum_bombas() == 0 && !tablero[fila][columna].isBomba()) {
-            int[][] desplazamientos = { {-1, -1}, {-1, 0}, {-1, 1}, {0, -1},{0, 1}, {1, -1},  {1, 0}, {1, 1}};
-
-            for (int i = 0; i < desplazamientos.length; i++) {
-                int nuevaFila = fila + desplazamientos[i][0];
-                int nuevaColumna = columna + desplazamientos[i][1];
-
-                destapar(nuevaFila, nuevaColumna);
-            }
+        if(tablero[fila][columna].getNum_bombas() == 0){
+            Destapar_ceros(fila, columna);
         }
+
+
     }
 
-    public static void destapar_primero(int fila, int columna){
-        int[][] desplazamientos = { {-1, -1}, {-1, 0},{-2,0}, {-1, 1}, {0, -1}, {0,-2}, {0, 1} ,{0, 2}, {1, -1},  {1, 0} , {2,0}, {1, 1}};
+
+
+    public static void destapar_primero(int fila, int columna, Tablero t){
 
         if (fila < 0 || fila >= tablero.length || columna < 0 || columna >= tablero[0].length) {
             return;
         }
+
         tablero[fila][columna].setTapada(false);
+
 
         for (int k = 0; k < desplazamientos.length; k++) {
             int nuevaFila = fila + desplazamientos[k][0];
@@ -184,9 +180,51 @@ public class Tablero {
                      tablero[nuevaFila][nuevaColumna].setTapada(false);
 
             }
+
+        }
+
+        colocar_bombas(t);
+        contar_bombas();
+
+        for (int k = 0; k < desplazamientos.length; k++) {
+            int nuevaFila = fila + desplazamientos[k][0];
+            int nuevaColumna = columna + desplazamientos[k][1];
+
+            if (nuevaFila >= 0 && nuevaFila < tablero.length &&
+                    nuevaColumna >= 0 && nuevaColumna < tablero[fila].length) {
+                Destapar_ceros(nuevaColumna,nuevaColumna );
+
+            }
+
         }
 
 
+
+
+    }
+
+    private static void Destapar_ceros(int fila, int columna) {
+        int[][] desplazamientos = { {-1, -1}, {-1, 0}, {-1, 1}, {0, -1},{0, 1}, {1, -1},  {1, 0}, {1, 1}};
+
+        if (tablero[fila][columna].getNum_bombas() == 0 && !tablero[fila][columna].isBomba()) {
+
+
+            for (int i = 0; i < desplazamientos.length; i++) {
+                int nuevaFila = fila + desplazamientos[i][0];
+                int nuevaColumna = columna + desplazamientos[i][1];
+
+                if (nuevaFila >= 0 && nuevaFila < tablero.length && nuevaColumna >= 0 && nuevaColumna < tablero[0].length
+                        && tablero[nuevaFila][nuevaColumna].isTapada() && !tablero[nuevaFila][nuevaColumna].isMarcada()) {
+
+                    tablero[nuevaFila][nuevaColumna].setTapada(false);
+
+                    if( tablero[nuevaFila][nuevaColumna].getNum_bombas()==0){
+                        Destapar_ceros(nuevaFila, nuevaColumna);
+                    }
+                }
+
+            }
+        }
     }
 
 

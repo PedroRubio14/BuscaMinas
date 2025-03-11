@@ -1,18 +1,20 @@
 public class Juego {
     public void partida (){
-        Tablero t = new Tablero();
-
-        t.llenar_tablero();
-        Tablero.mostrar_tablero();
-
+        Tablero t = new Tablero(10,10);
+        int numeroTurno = 0;
         boolean partida_finalizada = false;
 
-        primerTurno(t);
-
         while(!partida_finalizada){
-            turno();
-            Tablero.mostrar_tablero();
-            partida_finalizada = (Tablero.ganador() || Tablero.perdedor());
+            if(numeroTurno == 0){
+                t.llenar_tablero();
+                Tablero.mostrar_tablero();
+                primerTurno(t);
+            } else {
+                turno();
+                Tablero.mostrar_tablero();
+                partida_finalizada = (Tablero.ganador() || Tablero.perdedor());
+            }
+            numeroTurno++;
 
         }
 
@@ -53,13 +55,7 @@ public class Juego {
             Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_C);
             int columna = Textos.llegirInt ();
 
-            Tablero.destapar_primero(fila, columna);
-            t.colocar_bombas();
-            t.contar_bombas();
-
-
-
-
+            Tablero.destapar_primero(fila, columna,t);
 
     }
 
