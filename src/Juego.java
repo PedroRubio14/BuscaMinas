@@ -19,6 +19,9 @@ public class Juego {
                 numeroTurno++;
             } else {
                 turno();
+                if(partida_finalizada){
+                    break;
+                }
                 Tablero.mostrar_tablero();
                 numeroTurno++;
             }

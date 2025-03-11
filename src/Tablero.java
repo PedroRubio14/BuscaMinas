@@ -134,6 +134,8 @@ public class Tablero {
 
                 if(tablero[i][y].isBomba()){
                     tablero[i][y].setTapada(false);
+                    tablero[i][y].setMarcada(false);
+
 
                 }
 
@@ -150,7 +152,9 @@ public class Tablero {
             return;
         }
        if( tablero[fila][columna].isBomba()){
+
            perdedor();
+
        }else {
            casillas_Destapadas++;
        }
