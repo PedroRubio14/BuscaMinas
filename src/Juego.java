@@ -6,7 +6,7 @@ public class Juego {
     }
 
     public void partida (){
-        Tablero t = new Tablero(10,10,80);
+        Tablero t = new Tablero(10,10,10);
         int numeroTurno = 0;
 
 
@@ -31,40 +31,28 @@ public class Juego {
     }
 
     public void turno(){
+        Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_F);
+        int fila = Textos.llegirInt ();
+        Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_C);
+        int columna = Textos.llegirInt ();
+        Textos.imprimir(Textos.Codigo.ESPACIO);
+
         Textos.imprimir(Textos.Codigo.ELECCION);
         Textos.llegirString();
         Textos.imprimir(Textos.Codigo.ESPACIO);
         String eleccion = Textos.llegirString();
 
         if(eleccion.equalsIgnoreCase("m")){
-            Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_F);
-            int fila = Textos.llegirInt ();
-            Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_C);
-            int columna = Textos.llegirInt ();
 
             if(!Tablero.tablero[fila][columna].isMarcada() &&  Tablero.tablero[fila][columna].isTapada()){
-
                 Tablero.tablero[fila][columna].setMarcada(true);
             }
 
-
-
         } else if(eleccion.equalsIgnoreCase("d")){
-            Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_F);
-            int fila = Textos.llegirInt ();
-            Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_C);
-            int columna = Textos.llegirInt ();
-
             Tablero.destapar(fila, columna);
-
         }
 
         else if(eleccion.equalsIgnoreCase("DM")){
-            Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_F);
-            int fila = Textos.llegirInt ();
-            Textos.imprimir(Textos.Codigo.ELECCION_CASILLA_C);
-            int columna = Textos.llegirInt ();
-
             Tablero.tablero[fila][columna].setMarcada(false);
         }
 
