@@ -6,12 +6,15 @@ public class Juego {
     }
 
     public void partida (){
-        Tablero t = new Tablero(10,10,10);
+        Textos.imprimir(Textos.Codigo.DIFICULTAD);
+        int dificultad = Textos.llegirInt ();
+        Tablero t = TableroFactory.crearTablero(dificultad);
         int numeroTurno = 0;
 
 
         while(!partida_finalizada){
             if(numeroTurno == 0){
+
                 t.llenar_tablero();
                 Tablero.mostrar_tablero();
                 primerTurno(t);

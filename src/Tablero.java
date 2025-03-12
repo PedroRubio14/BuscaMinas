@@ -1,6 +1,6 @@
 public class Tablero {
     private int filas ;
-    private int columnas;
+    private static int columnas;
     private int num_bombas;
     public static Casilla[][] tablero;
     private static final int[][] desplazamientos = { {-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
@@ -91,7 +91,7 @@ public class Tablero {
         for (int i = 0; i < tablero.length; i++) {
 
                 for (int y = 0; y < tablero[i].length; y++) {
-                    if(y%10 == 0){
+                    if(y%columnas == 0){
                         Textos.imprimir(Textos.Codigo.ESPACIO);
                     }
                     if (tablero[i][y].isMarcada()) {

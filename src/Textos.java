@@ -42,6 +42,7 @@ public class Textos {
         GANADOR,
         PERDEDOR,
         NUMERO,
+        DIFICULTAD,
 
     }
     public static void imprimir (Codigo codigo, Object...args){
@@ -106,8 +107,14 @@ public class Textos {
                 if(args.length > 0 && args[0] instanceof Integer n) {
                     System.out.printf("%5d ",n);
                 }
+                break;
 
-
+            case DIFICULTAD:
+                System.out.println("QUE DIFICULTAD QUIERES?");
+                System.out.println("1");
+                System.out.println("2");
+                System.out.println("3");
+                break;
 
         }
 
