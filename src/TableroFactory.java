@@ -10,7 +10,7 @@ public class TableroFactory {
                 return new Tablero(16,16,40);
 
             case 3:
-                return new Tablero(16,30,99);
+                return new Tablero(30,30,99);
 
 
             default:
